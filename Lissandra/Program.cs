@@ -18,9 +18,13 @@ namespace Lissandra
 
         private static void Loading_OnLoadingComplete(EventArgs args)
         {
-            Spells.ini();
-            Meniu.Ini();
-            Events.ini();
+            if (Player.Instance.ChampionName == "Lissandra")
+            {
+                Chat.Print("Lissandra by modziux Loaded Good luck",System.Drawing.Color.AliceBlue);
+                Spells.ini();
+                Meniu.Ini();
+                Events.ini();
+            }
         }
     }
 }
