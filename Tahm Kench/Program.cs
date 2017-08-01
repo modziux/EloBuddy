@@ -43,7 +43,6 @@ namespace Tamh_kench
             Perma.Permactive();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
-                Chat.Print(Spells.R.Range);
                 combo.Combo();
             }
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))

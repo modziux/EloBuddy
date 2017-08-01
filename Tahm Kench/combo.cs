@@ -41,7 +41,7 @@ namespace Tamh_kench
                     Spells.WSwallow.Cast(wswallowt);
                 }
             }
-            if (wsplitt != null)
+            if (wsplitt != null && Extension.GetCheckBoxValue(ComboMenu, "Combo.W.Minion"))
             {
                 if (Spells.WSpit.IsReady() && Extension.GetCheckBoxValue(ComboMenu,"Combo.W.Minion"))
                 {
@@ -49,7 +49,7 @@ namespace Tamh_kench
                     {
                         Spells.WSwallow.Cast(closestminion);
                     }
-                    if(Extension.Swallowed)
+                    if(Extension.Swallowed && Extension.GetCheckBoxValue(ComboMenu, "Combo.W.Minion"))
                     {
                         Spells.WSpit.Cast(wsplitt);
                     }
