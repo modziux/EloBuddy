@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
+using EloBuddy.SDK.Rendering;
+using Lux;
+using SharpDX;
+using Color = System.Drawing.Color;
 
 namespace lux.logic
 {
@@ -16,10 +15,14 @@ namespace lux.logic
         {
             if (target != null)
             {
-                var qpredict = Spells.Q.GetPrediction(target);
-                if (qpredict.HitChancePercent >= Extension.GetSliderValue(Meniu.Prediction, "q.prediction"))
+                var delay = 0.25f + Player.Instance.Position.Distance(target) / Spells.Q.Speed;
+                var predpos = pred.PredEx(target, delay);
+                var rect = new Geometry.Polygon.Rectangle(Player.Instance.Position,predpos,Spells.Q.Width);
+                var collcount = ObjectManager.Get<Obj_AI_Base>().Where(x => rect.IsInside(x) && x.IsEnemy && !x.IsDead).Count();
+
+                if (collcount <= 1)
                 {
-                    Spells.Q.Cast(qpredict.CastPosition);
+                    Spells.Q.Cast(predpos);
                 }
             }
         }

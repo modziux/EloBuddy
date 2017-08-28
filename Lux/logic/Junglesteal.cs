@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace lux.logic
 {
@@ -10,7 +6,7 @@ namespace lux.logic
     {
         public static void ini()
         {
-            foreach (var mob in Extension.SupportedJungleMobs.Where(m => Extension.GetCheckBoxValue(Meniu.Junglesteal,m.BaseSkinName) && Spells.R.IsReady() && Extension.WillKill(Spells.R,m)))
+            foreach (var mob in Extension.SupportedJungleMobs.Where(m => Meniu.Junglesteal.GetCheckBoxValue(m.BaseSkinName) && Spells.R.IsReady() && Spells.R.WillKill(m)))
             {
                 Spells.R.Cast(mob);
             }

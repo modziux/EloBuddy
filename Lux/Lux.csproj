@@ -84,6 +84,7 @@
     <Compile Include="logic\Wlogic.cs" />
     <Compile Include="Lux.cs" />
     <Compile Include="Meniu.cs" />
+    <Compile Include="pred.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellDatabase.cs" />

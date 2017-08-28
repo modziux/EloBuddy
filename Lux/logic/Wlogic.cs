@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EloBuddy.SDK.Constants;
-using EloBuddy.SDK.Rendering;
-using SharpDX;
+﻿using System.Collections.Generic;
 using EloBuddy;
 using EloBuddy.SDK;
 using UnsignedEvade;
@@ -27,13 +20,13 @@ namespace lux.logic
                             if (ShouldShield(missile, info, client) && CollisionCheck(missile, info, client))
                             {
                                 if (info.ChannelType == SpellDatabase.ChannelType.None && Spells.W.IsReady()
-                                    && Extension.GetCheckBoxValue(Meniu.Shield,client.ChampionName))
+                                    && Meniu.Shield.GetCheckBoxValue(client.ChampionName))
 
                                 {
                                     Spells.W.Cast(client.ServerPosition);
                                 }
                                 else if (info.ChannelType != SpellDatabase.ChannelType.None && Spells.W.IsReady()
-                                    && Extension.GetCheckBoxValue(Meniu.Shield, client.ChampionName))
+                                    && Meniu.Shield.GetCheckBoxValue(client.ChampionName))
                                     Spells.W.Cast(client.ServerPosition);
                             }
                         }

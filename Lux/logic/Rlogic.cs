@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Enumerations;
+using Lux;
 
 namespace lux.logic
 {
@@ -13,18 +8,19 @@ namespace lux.logic
     {
         public static void FinisherR(Obj_AI_Base target)
         {
-            if (Spells.R.GetPrediction(target).HitChancePercent >= Extension.GetSliderValue(Meniu.Prediction, "r.prediction") && Spells.GetDamage(target,SpellSlot.R) >= Prediction.Health.GetPrediction(target,Spells.R.CastDelay + Game.Ping))
-            {
-                Spells.R.Cast(target);
+            if (target.GetDamage(SpellSlot.R) >= Prediction.Health.GetPrediction(target,Spells.R.CastDelay + Game.Ping) && Prediction.Health.GetPrediction(target,Spells.R.CastDelay + Game.Ping) >= 0)
+            {;
+                var predpos = pred.PredEx(target, 1f);
+                Spells.R.Cast(predpos);
             }
         }
         public static void MultiR(Obj_AI_Base target)
         {
-            Spells.R.CastIfItWillHit(Extension.GetSliderValue(Meniu.Combo, "combo.r.min"),Extension.GetSliderValue(Meniu.Prediction, "r.prediction"));
+            Spells.R.CastIfItWillHit(Meniu.Combo.GetSliderValue("combo.r.min"),Meniu.Prediction.GetSliderValue("r.prediction"));
         }
         public static void Rchoise(Obj_AI_Base target)
         {
-            switch (Extension.GetComboboxValue(Meniu.Combo, "combo.r.logic"))
+            switch (Meniu.Combo.GetComboboxValue("combo.r.logic"))
             {
                 case 0:
                     FinisherR(target);

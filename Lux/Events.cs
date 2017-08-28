@@ -7,6 +7,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
 using EloBuddy.SDK.Rendering;
+using Lux;
 
 namespace lux
 {
@@ -129,7 +130,7 @@ namespace lux
             }
             if (!ObjectManager.Player.IsDead && Extension.GetCheckBoxValue(Meniu.Misc, "auto.q.imo") && Spells.Q.IsReady())
             {
-                foreach (var enemy in EntityManager.Enemies.Where(x => x.IsValidTarget(Spells.Q.Range) && !x.IsDead && !x.IsZombie && !x.IsMinion && !x.IsMonster))
+                foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => Spells.Q.IsInRange(x) && !x.IsDead))
                 {
                     logic.Permalogic.AutoQIfEnemyImmobile(enemy);
                 }
@@ -141,14 +142,14 @@ namespace lux
             }
             if (!ObjectManager.Player.IsDead && Extension.GetCheckBoxValue(Meniu.Misc, "auto.e.imo") && Spells.E.IsReady() && Extension.ECheck() != 2)
             {
-                foreach (var enemy in EntityManager.Enemies.Where(x => x.IsValidTarget(Spells.E.Range) && !x.IsDead && !x.IsZombie && !x.IsMinion && !x.IsMonster))
+                foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => Spells.E.IsInRange(x) && !x.IsDead))
                 {
                     logic.Permalogic.AutoEIfEnemyImmobile(enemy);
                 }
             }
             if (!ObjectManager.Player.IsDead && Extension.GetCheckBoxValue(Meniu.Misc, "auto.r") && Spells.R.IsReady())
             {
-                foreach (var enemy in EntityManager.Enemies.Where(x => x.IsValidTarget(Spells.R.Range) && !x.IsDead && !x.IsZombie && !x.IsMinion && !x.IsMonster))
+                foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => Spells.R.IsInRange(x) && !x.IsDead))
                 {
                     logic.Permalogic.AutoRIfEnemyKillable(enemy);
                 }

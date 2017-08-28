@@ -1,9 +1,6 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Events;
-using EloBuddy.SDK.Enumerations;
-using System;
-using System.Linq;
+using Lux;
 
 namespace lux.logic
 {
@@ -11,23 +8,24 @@ namespace lux.logic
     {
         public static void AutoQIfEnemyImmobile(Obj_AI_Base target)
         {
-            if (Extension.IsEnemyImmobile(target) && Spells.Q.GetPrediction(target).HitChancePercent >= Extension.GetSliderValue(Meniu.Prediction,"q.prediction") )
+            if (Extension.IsEnemyImmobile(target) && Spells.Q.GetPrediction(target).HitChancePercent >= Meniu.Prediction.GetSliderValue("q.prediction") )
             {
                 Spells.Q.Cast(target);
             }
         }
         public static void AutoEIfEnemyImmobile(Obj_AI_Base target)
         {
-            if (Extension.IsEnemyImmobile(target) && Spells.E.GetPrediction(target).HitChancePercent >= Extension.GetSliderValue(Meniu.Prediction, "e.prediction") && Extension.ECheck() != 2)
+            if (Extension.IsEnemyImmobile(target) && Spells.E.GetPrediction(target).HitChancePercent >= Meniu.Prediction.GetSliderValue("e.prediction") && Extension.ECheck() != 2)
             {
                 Spells.E.Cast(target);
             }
         }
         public static void AutoRIfEnemyKillable(Obj_AI_Base target)
         {
-            if (Spells.R.GetPrediction(target).HitChancePercent >= Extension.GetSliderValue(Meniu.Prediction, "r.prediction") && Spells.GetDamage(target, SpellSlot.R) >= Prediction.Health.GetPrediction(target, Spells.R.CastDelay + Game.Ping))
+            if ( target.GetDamage(SpellSlot.R) >= Prediction.Health.GetPrediction(target, Spells.R.CastDelay + Game.Ping) && Prediction.Health.GetPrediction(target, Spells.R.CastDelay + Game.Ping) >= 0)
             {
-                Spells.R.Cast(target);
+                var predpos = pred.PredEx(target, 1f);
+                Spells.R.Cast(predpos);
             }
         }
     }
